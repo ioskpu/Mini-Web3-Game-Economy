@@ -96,3 +96,33 @@ Step 4 is critical. Until the role is granted, no rewards can be minted. After t
 | Token burning | Not implemented | No current mechanic consumes tokens. Can be added if future game integration requires it. |
 | Transfer restrictions | None on GGOLD | Tokens are freely transferable. No pause, no blacklist, no fees. |
 | Multiplier storage | Constants | Not configurable post-deploy. Makes the reward model predictable and trustable. |
+
+## Design Extensions (Not Implemented)
+
+### Non-Custodial / Delegated Staking
+
+A staking model where NFTs remain in the user's wallet while still accruing rewards, typically enforced through delegation registries or signature-based locking. This was not implemented because custodial staking eliminates a class of edge cases around transfer-while-staked scenarios and keeps the accounting model straightforward. It would make sense if the ecosystem requires users to display or use their NFTs in external applications while staking.
+
+### Dynamic Reward Rates Per Rarity
+
+A system where each rarity tier has an independently adjustable reward rate rather than a fixed multiplier applied to a single base rate. This was not implemented because fixed multipliers provide a predictable and auditable reward model with minimal governance surface. It would become relevant if the economy requires fine-grained balancing across tiers in response to observed staking distribution.
+
+### Reward Token Sinks (Burn Mechanics)
+
+Mechanisms that remove GGOLD from circulation, such as crafting, upgrades, or marketplace fees. This was not implemented because no game mechanic currently consumes tokens, and introducing a sink without a corresponding use case would add complexity without purpose. It would make sense when a game client or marketplace creates genuine demand for token consumption.
+
+### Off-chain Metadata with On-chain Commitment
+
+A pattern where rich metadata (images, descriptions, extended stats) is stored off-chain (IPFS or centralized CDN) while a content hash is committed on-chain for integrity verification. This was not implemented because the current attribute set is small enough to store entirely on-chain without meaningful gas overhead. It would be appropriate when NFTs carry visual assets or complex metadata that exceed practical on-chain storage limits.
+
+### Merkle-based Reward Claim Optimization
+
+A model where reward distributions are computed off-chain and published as a Merkle root, allowing users to claim by submitting a proof against the root. This was not implemented because the per-user update-on-interaction model is already O(1) and sufficient for the current scale. It would become valuable in scenarios with very large user bases or where batch reward distributions need to be computed externally and verified on-chain.
+
+### On-chain Governance for System Parameters
+
+A governance mechanism allowing token holders to vote on system parameters such as reward rates, rarity multipliers, or staking rules. This was not implemented because the current system is owner-administered and the parameter surface is intentionally small. It would make sense if the project transitions to a community-owned protocol where decentralized control over economic parameters is a requirement.
+
+### Game Engine Integration Layer
+
+An interface contract or adapter layer that allows a game client to read NFT attributes, verify ownership or staking status, and trigger on-chain actions based on in-game events. This was not implemented because no game client currently exists and speculative interfaces tend to require revision once real integration begins. It would be the natural next step when a game engine is ready to consume on-chain state and emit transactions based on gameplay.
