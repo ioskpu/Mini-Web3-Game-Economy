@@ -1,0 +1,10 @@
+{
+  "name": "mini-web3-game-economy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A minimal Web3 game economy: NFTs with rarity, staking for rewards, and ERC-20 reward token.",
+  "scripts": {
+    "compile": "cd contracts && npm run compile",
+    "test": "cd contracts && npm run test"
+  }
+}
