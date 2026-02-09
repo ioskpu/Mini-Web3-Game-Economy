@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Web3 Professional Dark Palette */
+  --background: #0f1115; /* Fondo oscuro azulado/grisáceo */
+  --foreground: #f8fafc; /* Texto principal claro */
+  --card-bg: #1a1d23;    /* Cards ligeramente más claras */
+  --card-border: #2d333d;
+  --accent: #3b82f6;     /* Azul profesional */
+  --accent-hover: #2563eb;
+  --secondary-text: #94a3b8; /* Texto secundario gris */
+  --staked-bg: #1e293b;  /* Azul oscuro para ítems staked */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card-bg);
+  --color-border: var(--card-border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-secondary: var(--secondary-text);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Headings */
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--foreground);
+}
+
+/* Global Transitions for small interactions */
+button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

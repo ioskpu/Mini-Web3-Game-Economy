@@ -39,9 +39,24 @@ export default function GGOLDBalance() {
   if (!address) return null;
 
   return (
-    <section style={{ marginTop: "1rem" }}>
-      <h2>GGOLD Balance</h2>
-      <p>{balance}</p>
-    </section>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <p style={{ fontSize: "2.5rem", fontWeight: "800", color: "var(--foreground)", letterSpacing: "-0.04em" }}>
+        {balance} <span style={{ fontSize: "1rem", color: "var(--secondary-text)", fontWeight: "500", letterSpacing: "normal" }}>GGOLD</span>
+      </p>
+      <div style={{ 
+        display: "inline-flex", 
+        alignItems: "center", 
+        gap: "0.5rem", 
+        color: "var(--secondary-text)", 
+        fontSize: "0.85rem",
+        backgroundColor: "rgba(255,255,255,0.03)",
+        padding: "8px 12px",
+        borderRadius: "8px",
+        border: "1px solid var(--card-border)",
+        width: "fit-content"
+      }}>
+        <span>Available in Wallet</span>
+      </div>
+    </div>
   );
 }

@@ -56,13 +56,35 @@ export default function Rewards() {
   if (!address) return null;
 
   return (
-    <section style={{ marginTop: "2rem" }}>
-      <h2>Rewards</h2>
-      <p>Pending GGOLD: {pending}</p>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+      <div>
+        <p style={{ fontSize: "2.5rem", fontWeight: "800", color: "var(--foreground)", letterSpacing: "-0.04em" }}>
+          {pending} <span style={{ fontSize: "1rem", color: "var(--secondary-text)", fontWeight: "500", letterSpacing: "normal" }}>GGOLD</span>
+        </p>
+        <p style={{ fontSize: "0.85rem", color: "#10b981", fontWeight: "600", marginTop: "0.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{ display: "inline-block", width: "6px", height: "6px", backgroundColor: "#10b981", borderRadius: "50%" }}></span>
+          Accruing in real-time
+        </p>
+      </div>
 
-      <button onClick={claim} disabled={loading || pending === "0"}>
-        {loading ? "Claiming..." : "Claim"}
+      <button 
+        onClick={claim} 
+        disabled={loading || pending === "0"}
+        style={{
+          width: "100%",
+          padding: "14px",
+          backgroundColor: pending === "0" ? "rgba(255,255,255,0.05)" : "var(--accent)",
+          color: pending === "0" ? "var(--secondary-text)" : "#fff",
+          border: "none",
+          borderRadius: "12px",
+          fontWeight: "700",
+          fontSize: "1rem",
+          cursor: pending === "0" ? "not-allowed" : "pointer",
+          boxShadow: pending === "0" ? "none" : "0 10px 15px -3px rgba(59, 130, 246, 0.3)"
+        }}
+      >
+        {loading ? "Confirming..." : "Claim Rewards"}
       </button>
-    </section>
+    </div>
   );
 }

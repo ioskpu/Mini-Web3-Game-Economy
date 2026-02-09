@@ -134,44 +134,109 @@ export default function Inventory() {
   if (!address) return null;
 
   return (
-    <section style={{ marginTop: "2rem" }}>
-      <h2>Your Inventory</h2>
-
-      {loading && <p>Loading NFTs...</p>}
-
-      {!loading && items.length === 0 && (
-        <p>No NFTs found in wallet or staking.</p>
+    <section>
+      {loading && (
+        <div style={{ padding: "2rem", textAlign: "center", color: "var(--secondary-text)" }}>
+          Loading assets...
+        </div>
       )}
 
-      <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))" }}>
+      {!loading && items.length === 0 && (
+        <div style={{ 
+          padding: "3rem", 
+          textAlign: "center", 
+          border: "1px dashed var(--card-border)", 
+          borderRadius: "16px",
+          color: "var(--secondary-text)"
+        }}>
+          No NFTs found in wallet or staking.
+        </div>
+      )}
+
+      <div style={{ display: "grid", gap: "1.5rem", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
         {items.map((item) => (
           <div key={item.tokenId} style={{ 
-            padding: "1rem", 
-            border: "1px solid #ccc", 
-            borderRadius: "8px",
-            backgroundColor: item.isStaked ? "#f0f9ff" : "white"
+            padding: "1.5rem", 
+            border: "1px solid var(--card-border)", 
+            borderRadius: "20px",
+            backgroundColor: item.isStaked ? "var(--staked-bg)" : "var(--card-bg)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            transition: "transform 0.2s ease, border-color 0.2s ease",
+            position: "relative",
+            overflow: "hidden"
           }}>
-            <p><strong>NFT #{item.tokenId}</strong></p>
-            <p>Rarity: {item.rarity}</p>
-            <p>Status: {item.isStaked ? "Staked" : "In Wallet"}</p>
-            
-            {item.isStaked ? (
-              <button 
-                onClick={() => handleUnstake(item.tokenId)}
-                disabled={actionLoading !== null}
-                style={{ width: "100%", padding: "8px", cursor: "pointer" }}
-              >
-                {actionLoading === item.tokenId ? "Processing..." : "Unstake"}
-              </button>
-            ) : (
-              <button 
-                onClick={() => handleStake(item.tokenId)}
-                disabled={actionLoading !== null}
-                style={{ width: "100%", padding: "8px", cursor: "pointer" }}
-              >
-                {actionLoading === item.tokenId ? "Processing..." : "Stake"}
-              </button>
+            {item.isStaked && (
+              <div style={{ 
+                position: "absolute", 
+                top: "12px", 
+                right: "12px",
+                backgroundColor: "rgba(16, 185, 129, 0.1)",
+                color: "#10b981",
+                padding: "4px 10px",
+                borderRadius: "100px",
+                fontSize: "0.7rem",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                border: "1px solid rgba(16, 185, 129, 0.2)"
+              }}>
+                Staked
+              </div>
             )}
+            
+            <div>
+              <p style={{ fontSize: "0.8rem", color: "var(--secondary-text)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.25rem" }}>Token ID</p>
+              <p style={{ fontSize: "1.25rem", fontWeight: "700", color: "var(--foreground)" }}>#{item.tokenId}</p>
+            </div>
+
+            <div style={{ display: "flex", gap: "2rem" }}>
+              <div>
+                <p style={{ fontSize: "0.7rem", color: "var(--secondary-text)", textTransform: "uppercase", marginBottom: "0.25rem" }}>Rarity</p>
+                <p style={{ fontWeight: "600", color: "var(--foreground)" }}>{item.rarity}</p>
+              </div>
+            </div>
+
+            <div style={{ marginTop: "auto", paddingTop: "0.5rem" }}>
+              {item.isStaked ? (
+                <button 
+                  onClick={() => handleUnstake(item.tokenId)}
+                  disabled={actionLoading !== null}
+                  style={{ 
+                    width: "100%", 
+                    padding: "12px", 
+                    cursor: "pointer",
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    color: "var(--foreground)",
+                    border: "1px solid var(--card-border)",
+                    borderRadius: "12px",
+                    fontWeight: "600",
+                    fontSize: "0.9rem"
+                  }}
+                >
+                  {actionLoading === item.tokenId ? "Processing..." : "Unstake Asset"}
+                </button>
+              ) : (
+                <button 
+                  onClick={() => handleStake(item.tokenId)}
+                  disabled={actionLoading !== null}
+                  style={{ 
+                    width: "100%", 
+                    padding: "12px", 
+                    cursor: "pointer",
+                    backgroundColor: "var(--accent)",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "12px",
+                    fontWeight: "600",
+                    fontSize: "0.9rem",
+                    boxShadow: "0 4px 6px -1px rgba(59, 130, 246, 0.2)"
+                  }}
+                >
+                  {actionLoading === item.tokenId ? "Processing..." : "Stake Asset"}
+                </button>
+              )}
+            </div>
           </div>
         ))}
       </div>
