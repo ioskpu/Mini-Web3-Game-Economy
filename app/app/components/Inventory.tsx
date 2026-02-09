@@ -153,30 +153,29 @@ export default function Inventory() {
         </div>
       )}
 
-      <div style={{ display: "grid", gap: "1.5rem", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
+      <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))" }}>
         {items.map((item) => (
           <div key={item.tokenId} style={{ 
-            padding: "1.5rem", 
+            padding: "1rem", 
             border: "1px solid var(--card-border)", 
-            borderRadius: "20px",
+            borderRadius: "16px",
             backgroundColor: item.isStaked ? "var(--staked-bg)" : "var(--card-bg)",
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
-            transition: "transform 0.2s ease, border-color 0.2s ease",
+            gap: "0.75rem",
             position: "relative",
             overflow: "hidden"
           }}>
             {item.isStaked && (
               <div style={{ 
                 position: "absolute", 
-                top: "12px", 
-                right: "12px",
+                top: "8px", 
+                right: "8px",
                 backgroundColor: "rgba(16, 185, 129, 0.1)",
                 color: "#10b981",
-                padding: "4px 10px",
+                padding: "2px 8px",
                 borderRadius: "100px",
-                fontSize: "0.7rem",
+                fontSize: "0.6rem",
                 fontWeight: "700",
                 textTransform: "uppercase",
                 border: "1px solid rgba(16, 185, 129, 0.2)"
@@ -185,36 +184,35 @@ export default function Inventory() {
               </div>
             )}
             
-            <div>
-              <p style={{ fontSize: "0.8rem", color: "var(--secondary-text)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.25rem" }}>Token ID</p>
-              <p style={{ fontSize: "1.25rem", fontWeight: "700", color: "var(--foreground)" }}>#{item.tokenId}</p>
-            </div>
-
-            <div style={{ display: "flex", gap: "2rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
               <div>
-                <p style={{ fontSize: "0.7rem", color: "var(--secondary-text)", textTransform: "uppercase", marginBottom: "0.25rem" }}>Rarity</p>
-                <p style={{ fontWeight: "600", color: "var(--foreground)" }}>{item.rarity}</p>
+                <p style={{ fontSize: "0.65rem", color: "var(--secondary-text)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.1rem" }}>Token ID</p>
+                <p style={{ fontSize: "1.1rem", fontWeight: "700", color: "var(--foreground)" }}>#{item.tokenId}</p>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <p style={{ fontSize: "0.6rem", color: "var(--secondary-text)", textTransform: "uppercase", marginBottom: "0.1rem" }}>Rarity</p>
+                <p style={{ fontSize: "0.9rem", fontWeight: "600", color: "var(--foreground)" }}>{item.rarity}</p>
               </div>
             </div>
 
-            <div style={{ marginTop: "auto", paddingTop: "0.5rem" }}>
+            <div style={{ marginTop: "0.25rem" }}>
               {item.isStaked ? (
                 <button 
                   onClick={() => handleUnstake(item.tokenId)}
                   disabled={actionLoading !== null}
                   style={{ 
                     width: "100%", 
-                    padding: "12px", 
+                    padding: "8px", 
                     cursor: "pointer",
                     backgroundColor: "rgba(255,255,255,0.05)",
                     color: "var(--foreground)",
                     border: "1px solid var(--card-border)",
-                    borderRadius: "12px",
+                    borderRadius: "8px",
                     fontWeight: "600",
-                    fontSize: "0.9rem"
+                    fontSize: "0.8rem"
                   }}
                 >
-                  {actionLoading === item.tokenId ? "Processing..." : "Unstake Asset"}
+                  {actionLoading === item.tokenId ? "..." : "Unstake"}
                 </button>
               ) : (
                 <button 
@@ -222,18 +220,17 @@ export default function Inventory() {
                   disabled={actionLoading !== null}
                   style={{ 
                     width: "100%", 
-                    padding: "12px", 
+                    padding: "8px", 
                     cursor: "pointer",
                     backgroundColor: "var(--accent)",
                     color: "#fff",
                     border: "none",
-                    borderRadius: "12px",
+                    borderRadius: "8px",
                     fontWeight: "600",
-                    fontSize: "0.9rem",
-                    boxShadow: "0 4px 6px -1px rgba(59, 130, 246, 0.2)"
+                    fontSize: "0.8rem",
                   }}
                 >
-                  {actionLoading === item.tokenId ? "Processing..." : "Stake Asset"}
+                  {actionLoading === item.tokenId ? "..." : "Stake Asset"}
                 </button>
               )}
             </div>

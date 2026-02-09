@@ -56,14 +56,14 @@ export default function Rewards() {
   if (!address) return null;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <div>
-        <p style={{ fontSize: "2.5rem", fontWeight: "800", color: "var(--foreground)", letterSpacing: "-0.04em" }}>
-          {pending} <span style={{ fontSize: "1rem", color: "var(--secondary-text)", fontWeight: "500", letterSpacing: "normal" }}>GGOLD</span>
+        <p style={{ fontSize: "1.75rem", fontWeight: "800", color: "var(--foreground)", letterSpacing: "-0.04em", margin: 0 }}>
+          {pending} <span style={{ fontSize: "0.85rem", color: "var(--secondary-text)", fontWeight: "500", letterSpacing: "normal" }}>GGOLD</span>
         </p>
-        <p style={{ fontSize: "0.85rem", color: "#10b981", fontWeight: "600", marginTop: "0.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <span style={{ display: "inline-block", width: "6px", height: "6px", backgroundColor: "#10b981", borderRadius: "50%" }}></span>
-          Accruing in real-time
+        <p style={{ fontSize: "0.75rem", color: "#10b981", fontWeight: "600", marginTop: "0.1rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+          <span style={{ display: "inline-block", width: "5px", height: "5px", backgroundColor: "#10b981", borderRadius: "50%" }}></span>
+          Accruing rewards
         </p>
       </div>
 
@@ -72,18 +72,17 @@ export default function Rewards() {
         disabled={loading || pending === "0"}
         style={{
           width: "100%",
-          padding: "14px",
+          padding: "10px",
           backgroundColor: pending === "0" ? "rgba(255,255,255,0.05)" : "var(--accent)",
           color: pending === "0" ? "var(--secondary-text)" : "#fff",
           border: "none",
-          borderRadius: "12px",
+          borderRadius: "10px",
           fontWeight: "700",
-          fontSize: "1rem",
+          fontSize: "0.9rem",
           cursor: pending === "0" ? "not-allowed" : "pointer",
-          boxShadow: pending === "0" ? "none" : "0 10px 15px -3px rgba(59, 130, 246, 0.3)"
         }}
       >
-        {loading ? "Confirming..." : "Claim Rewards"}
+        {loading ? "..." : "Claim Rewards"}
       </button>
     </div>
   );

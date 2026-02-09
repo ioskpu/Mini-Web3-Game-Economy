@@ -10,160 +10,163 @@ export default function Home() {
 
   return (
     <main style={{ 
-      maxWidth: "1100px", 
+      maxWidth: "1200px", 
       margin: "0 auto", 
-      padding: "4rem 2rem", 
-      minHeight: "100vh"
+      padding: "1.5rem 2rem", 
+      height: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      overflow: "hidden"
     }}>
       <header style={{ 
-        textAlign: "center", 
-        marginBottom: "5rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: "1.5rem",
       }}>
-        <h1 style={{ 
-          fontSize: "3.5rem", 
-          fontWeight: "800",
-          letterSpacing: "-0.04em",
-          marginBottom: "1rem",
-          color: "var(--foreground)"
-        }}>
-          Game Economy
-        </h1>
-        <p style={{ 
-          fontSize: "1.25rem",
-          color: "var(--secondary-text)",
-          maxWidth: "600px",
-          margin: "0 auto",
-          fontWeight: "400"
-        }}>
-          On-chain staking engine with dynamic reward emission.
-        </p>
-        <div style={{ marginTop: "2rem" }}>
-          <span style={{
-            display: "inline-block",
-            padding: "6px 14px",
-            backgroundColor: "var(--card-bg)",
-            borderRadius: "100px",
-            fontSize: "0.8rem",
-            fontWeight: "600",
-            color: "var(--accent)",
-            border: "1px solid var(--card-border)",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em"
+        <div>
+          <h1 style={{ 
+            fontSize: "1.75rem", 
+            fontWeight: "800",
+            letterSpacing: "-0.04em",
+            color: "var(--foreground)",
+            margin: 0
           }}>
-            Sepolia Testnet
-          </span>
+            Game Economy <span style={{
+              fontSize: "0.7rem",
+              fontWeight: "600",
+              color: "var(--accent)",
+              border: "1px solid var(--card-border)",
+              padding: "2px 8px",
+              borderRadius: "4px",
+              marginLeft: "8px",
+              verticalAlign: "middle"
+            }}>SEPOLIA</span>
+          </h1>
         </div>
+
+        {address && (
+          <div style={{ 
+            padding: "0.5rem 1rem", 
+            backgroundColor: "var(--card-bg)", 
+            borderRadius: "12px", 
+            border: "1px solid var(--card-border)",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.75rem",
+          }}>
+            <div style={{ width: "6px", height: "6px", backgroundColor: "#10b981", borderRadius: "50%" }}></div>
+            <code style={{ 
+              fontWeight: "600", 
+              color: "var(--foreground)",
+              fontSize: "0.85rem",
+            }}>
+              {address.slice(0, 6)}...{address.slice(-4)}
+            </code>
+          </div>
+        )}
       </header>
 
       {!address ? (
         <div style={{ 
+          flex: 1,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "6rem 2rem", 
           border: "1px solid var(--card-border)", 
           borderRadius: "24px",
           backgroundColor: "var(--card-bg)",
           textAlign: "center",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
         }}>
           <h2 style={{ marginBottom: "1rem", fontSize: "1.75rem" }}>Connect to Dashboard</h2>
-          <p style={{ color: "var(--secondary-text)", marginBottom: "2.5rem", maxWidth: "400px" }}>
-            Authorize your wallet to view your assets and manage your staking positions.
-          </p>
           <button
             onClick={connect}
             style={{
-              padding: "16px 48px",
+              padding: "12px 32px",
               backgroundColor: "var(--accent)",
               color: "#fff",
-              borderRadius: "12px",
+              borderRadius: "10px",
               border: "none",
-              fontSize: "1.1rem",
+              fontSize: "1rem",
               fontWeight: "600",
               cursor: "pointer",
-              boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.3)"
             }}
           >
             Connect MetaMask
           </button>
         </div>
       ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: "4rem" }}>
-          <div style={{ 
-            padding: "1rem 1.5rem", 
-            backgroundColor: "var(--card-bg)", 
-            borderRadius: "16px", 
+        <div style={{ 
+          flex: 1,
+          display: "grid", 
+          gridTemplateColumns: "1fr 320px",
+          gridTemplateRows: "1fr",
+          gap: "1.5rem",
+          minHeight: 0
+        }}>
+          <section style={{ 
+            display: "flex", 
+            flexDirection: "column", 
+            minHeight: 0,
+            backgroundColor: "var(--card-bg)",
+            borderRadius: "20px",
             border: "1px solid var(--card-border)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            padding: "1.25rem"
           }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <div style={{ width: "8px", height: "8px", backgroundColor: "#10b981", borderRadius: "50%" }}></div>
-              <span style={{ color: "var(--secondary-text)", fontSize: "0.9rem", fontWeight: "500" }}>Active Session</span>
-            </div>
-            <code style={{ 
-              fontWeight: "600", 
-              color: "var(--foreground)",
-              backgroundColor: "rgba(255,255,255,0.05)",
-              padding: "6px 12px",
-              borderRadius: "8px",
-              fontSize: "0.9rem",
-              border: "1px solid var(--card-border)"
-            }}>
-              {address}
-            </code>
-          </div>
-          
-          <div style={{ display: "grid", gap: "4rem" }}>
-            <section>
-              <h2 style={{ fontSize: "1.75rem", marginBottom: "2rem" }}>Asset Inventory</h2>
+            <h2 style={{ fontSize: "1rem", fontWeight: "700", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--secondary-text)" }}>Asset Inventory</h2>
+            <div style={{ flex: 1, overflowY: "auto", paddingRight: "0.5rem" }}>
               <Inventory />
+            </div>
+          </section>
+          
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <section style={{ 
+              padding: "1.25rem", 
+              border: "1px solid var(--card-border)", 
+              borderRadius: "20px",
+              backgroundColor: "var(--card-bg)",
+            }}>
+              <h2 style={{ fontSize: "0.8rem", color: "var(--secondary-text)", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "1rem" }}>Rewards Pipeline</h2>
+              <Rewards />
             </section>
             
-            <div style={{ 
-              display: "grid", 
-              gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", 
-              gap: "2rem" 
+            <section style={{ 
+              padding: "1.25rem", 
+              border: "1px solid var(--card-border)", 
+              borderRadius: "20px",
+              backgroundColor: "var(--card-bg)",
             }}>
-              <section style={{ 
-                padding: "2.5rem", 
-                border: "1px solid var(--card-border)", 
-                borderRadius: "24px",
-                backgroundColor: "var(--card-bg)",
-                position: "relative",
-                overflow: "hidden"
-              }}>
-                <h2 style={{ fontSize: "1.25rem", color: "var(--secondary-text)", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2rem" }}>Rewards Pipeline</h2>
-                <Rewards />
-              </section>
-              
-              <section style={{ 
-                padding: "2.5rem", 
-                border: "1px solid var(--card-border)", 
-                borderRadius: "24px",
-                backgroundColor: "var(--card-bg)",
-              }}>
-                <h2 style={{ fontSize: "1.25rem", color: "var(--secondary-text)", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2rem" }}>GGOLD Liquidity</h2>
-                <GGOLDBalance />
-              </section>
+              <h2 style={{ fontSize: "0.8rem", color: "var(--secondary-text)", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "1rem" }}>GGOLD Liquidity</h2>
+              <GGOLDBalance />
+            </section>
+
+            <div style={{ 
+              marginTop: "auto",
+              padding: "1rem",
+              borderRadius: "16px",
+              border: "1px dashed var(--card-border)",
+              fontSize: "0.8rem",
+              color: "var(--secondary-text)",
+              textAlign: "center"
+            }}>
+              Technical Showcase<br/>
+              <span style={{ opacity: 0.7 }}>v1.0.0-stable</span>
             </div>
           </div>
         </div>
       )}
       
       <footer style={{ 
-        marginTop: "8rem", 
+        marginTop: "auto", 
         textAlign: "center", 
-        paddingTop: "3rem",
+        paddingTop: "1rem",
         borderTop: "1px solid var(--card-border)",
         color: "var(--secondary-text)",
-        fontSize: "0.9rem",
+        fontSize: "0.75rem",
         fontWeight: "400"
       }}>
-        Technical Showcase — Designed by Senior Frontend Engineer
+        Technical Showcase — Designed Luis Corales
       </footer>
     </main>
   );
