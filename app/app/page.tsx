@@ -1,5 +1,7 @@
 "use client";
 import Inventory from "./components/Inventory";
+import Rewards from "./components/Rewards";
+import GGOLDBalance from "./components/GGOLDBalance";
 
 import { useWeb3 } from "./providers";
 
@@ -32,6 +34,8 @@ export default function Home() {
             Connected as: <strong>{address}</strong>
           </p>
           <Inventory />
+          <Rewards />
+          <GGOLDBalance />
         </>
       )}
     </main>
